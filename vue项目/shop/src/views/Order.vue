@@ -187,7 +187,7 @@ export default {
     },
     computed: {
         addr(){
-            var index1 = this.$store.state.order.addrIndex
+            var index1 = this.$store.state.order.addrIndex || 0
             return this.$store.state.user.addrs.find((item,index)=>{
                 return index == index1
             })       

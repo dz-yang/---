@@ -43,9 +43,10 @@
                       <div class="p-2 bd-highlight" >{{books[index].name}}</div>
                       <div class="p-2 bd-highlight">库存：{{books[index].num}}件</div>
                       <div class="p-2 bd-highlight">
-                          <div class="d-flex flex-row bd-highlight mb-2" justify-content-between>
+                          <div class="d-flex flex-row bd-highlight mb-2  justify-content-between" >
                           <div class="p-2 bd-highlight" style="color:red">￥{{books[index].new_price | priceFilter(2)}}</div>
-                          <div class="p-2 bd-highlight">
+                          
+                          <div class=" bd-highlight">
                               <number :num='parseInt(books[index].num)' :n1='item.num>books[index].num ? books[index].num:item.num' :bookId='item.bookId' ></number>
                           </div>
                         

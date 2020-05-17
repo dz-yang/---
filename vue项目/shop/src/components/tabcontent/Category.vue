@@ -10,7 +10,7 @@
        <div class="container">
          <mt-navbar class="page-part" v-model="selected">
   <mt-tab-item id="hot">热销</mt-tab-item>
-  <mt-tab-item id="2">生活育儿</mt-tab-item>
+  <mt-tab-item id="new">新书</mt-tab-item>
   <mt-tab-item id="3">儿童图书</mt-tab-item>
   <mt-tab-item id="4">科学技术</mt-tab-item>
   <mt-tab-item id="5">教育考试</mt-tab-item>
@@ -21,10 +21,10 @@
 <!-- tab-container -->
 <mt-tab-container v-model="selected">
   <mt-tab-container-item id="hot">
-    <every-category :category="selected"></every-category>
+    <every-category :category="selected"  v-if="selected == 'hot'"></every-category>
   </mt-tab-container-item>
-  <mt-tab-container-item id="2">
-    
+  <mt-tab-container-item id="new">
+    <every-category :category="selected"  v-if="selected == 'new'"></every-category>
   </mt-tab-container-item>
   <mt-tab-container-item id="3" >
     

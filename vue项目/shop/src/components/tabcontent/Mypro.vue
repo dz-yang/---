@@ -3,7 +3,7 @@
    <mt-header fixed title="我的" class="header"></mt-header>  
        
 <div class="d-flex bd-highlight bgc">
-  <div class="p-2 flex-grow-1 bd-highlight avatext">
+  <div class=" flex-grow-1 bd-highlight avatext">
       <div class="avatar">
           <img src="../../assets/avatar.jpg" alt="">
       </div>
@@ -12,7 +12,7 @@
           
       </div>
       <div class="mbtn" v-else>
-          <router-link to='/login'><mt-button size="small" type="default">登录</mt-button></router-link>
+          <router-link to='/login'><mt-button size="small" type="default" >登录</mt-button></router-link>
           <router-link to='/register'><mt-button size="small" type="default">注册</mt-button></router-link>
           
          
@@ -113,16 +113,32 @@ export default {
             user:null,
             show:false,
             show1:false,
-            show2:false
+            show2:false,
+            show3:false,
+            show4:false,
         }
     },
     created() {
         this.user = this.$store.state.user
+       
     },
     methods: {
         addr(){
             if(!this.user){
-                alert('请去登录')
+               this.$messagebox({
+                                title: '提示信息',
+                                message:" 请去登录！",
+                                showCancelButton: true,
+                                 confirmButtonText:"登录",
+                                  cancelButtonText:"返回"
+                                }).then(action => {
+                                    if(action == 'confirm'){  
+                                        this.$router.push({
+                                            path:`/login`
+                                        })
+                                        }else{
+                                        }
+                                        }) 
             }else{
               this.$router.push({
                 path:`/addrmanagement/${this.user._id}`
@@ -131,7 +147,25 @@ export default {
         },
         showbtn(){
           //显示退出按钮
-          this.show = this.show ?false: true
+         if(!this.user){
+               this.$messagebox({
+                                title: '提示信息',
+                                message:" 请去登录！",
+                                showCancelButton: true,
+                                 confirmButtonText:"登录",
+                                  cancelButtonText:"返回"
+                                }).then(action => {
+                                    if(action == 'confirm'){  
+                                        this.$router.push({
+                                            path:`/login`
+                                        })
+                                        }else{
+                                        }
+                                        }) 
+            }else{
+              this.show = this.show ?false: true
+            }
+          
         },
         logout(){
           //退出登录
@@ -140,28 +174,100 @@ export default {
         },
         showinp(){
           // 个人资料
-          if(this.user){
-            this.show1 =this.show1?false:true
+         
+          if(!this.user){
+            this.$messagebox({
+                                title: '提示信息',
+                                message:" 请去登录！",
+                                showCancelButton: true,
+                                 confirmButtonText:"登录",
+                                  cancelButtonText:"返回"
+                                }).then(action => {
+                                    if(action == 'confirm'){  
+                                        this.$router.push({
+                                            path:`/login`
+                                        })
+                                        }else{
+                                        }
+                                        }) 
           }
+         else{
+              this.show1 = this.show1 ?false: true
+            }
+          
         },
         showmsg(){
-          // 个人资料
+          // 个人消息
           if(this.user){
             this.show2 =this.show2?false:true
+          }else{
+              this.$messagebox({
+                                title: '提示信息',
+                                message:" 请去登录！",
+                                showCancelButton: true,
+                                 confirmButtonText:"登录",
+                                  cancelButtonText:"返回"
+                                }).then(action => {
+                                    if(action == 'confirm'){  
+                                        this.$router.push({
+                                            path:`/login`
+                                        })
+                                        }else{
+                                        }
+                                        }) 
           }
         },
         order(a){
-          this.$router.push({
+          if(this.user){
+            this.show3 =this.show3?false:true
+            this.$router.push({
             path:`/myorder/${a}`
           })
+          }else{
+            this.$messagebox({
+                                title: '提示信息',
+                                message:" 请去登录！",
+                                showCancelButton: true,
+                                 confirmButtonText:"登录",
+                                  cancelButtonText:"返回"
+                                }).then(action => {
+                                    if(action == 'confirm'){  
+                                        this.$router.push({
+                                            path:`/login`
+                                        })
+                                        }else{
+                                        }
+                                        }) 
+          }
+         
 
         },
         comment(){
-          this.$router.push({
+           if(this.user){
+            this.show4 =this.show4?false:true
+            this.$router.push({
             path:`/mycomment/0`
           })
-        }
+          }else{
+           this.$messagebox({
+                                title: '提示信息',
+                                message:" 请去登录！",
+                                showCancelButton: true,
+                                 confirmButtonText:"登录",
+                                  cancelButtonText:"返回"
+                                }).then(action => {
+                                    if(action == 'confirm'){  
+                                        this.$router.push({
+                                            path:`/login`
+                                        })
+                                        }else{
+                                        }
+                                        }) 
+          }
+          
+        
     },
+    }
     
 }
 </script>
@@ -192,7 +298,7 @@ export default {
 }
 .name{
     padding: 20px;
-    font-size: 25px;
+    font-size: 20px;
 }
 .bgc{
     background-color: pink;

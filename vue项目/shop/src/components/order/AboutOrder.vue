@@ -50,7 +50,8 @@
    </li>
     <li class="list-group-item" v-if="item.state == '1'">
        <div class="float-right">
-          会尽快处理您的订单！
+            <mt-button type="danger" @click='moni(item)' title="模拟后台发货!">会尽快处理您的订单！</mt-button>
+          
        </div>
    </li>
    <li class="list-group-item" v-if="item.state == '4'">
@@ -192,6 +193,20 @@ export default {
         
                        })
                        
+        },
+        moni(item){
+            // 模拟后台发货
+               this.$emit('fun','2')
+            Indicator.open({
+       text: '加载中...',
+        spinnerType: 'fading-circle'
+        })
+             getOrder({orderId:item.orderId,flag:3,state:2}).then(res=>{
+                             Indicator.close()
+        
+                       })
+                       
+        
         },
         comment(item){
            this.$router.push({

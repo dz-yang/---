@@ -119,6 +119,7 @@ import {getOrder} from '../network/order'
 import {getBooks} from '../network/book'
 import { Indicator } from 'mint-ui';
 
+
 export default {
     data() {
         return {
@@ -152,14 +153,19 @@ export default {
                     if(action == 'confirm'){   
                          
                  this.order.books.forEach(obj=>{
+                            Indicator.open({
+                        text: '加载中...',
+                        spinnerType: 'fading-circle'
+                        });
+            
                      getBooks({_id:obj.bookId,opt:'no',num:obj.bookNum,flag:5}).then(res=>{
                          
                      })
                  })
                 getOrder({userId:this.$store.state.user._id,flag:2,orderId:this.order.orderId}).then(res=>{
-                        
+                        Indicator.close()
                     this.$router.push({
-                        path:`/myorder/${-1}`
+                        path:`/myorder/-1`
                     })
                     })
                          
